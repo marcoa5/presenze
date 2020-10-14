@@ -1,6 +1,7 @@
 <div style="text-align:center; width: 100%;">
-    <button id="scelta" mat-raised-button color="primary" (click)="si=!si">{{ si==true ? "Sign In" : "Sign Up" }}</button>
+    <button id="scelta" mat-raised-button color="secondary" (click)="si=!si">{{ si==true ? "Sign In" : "Sign Up" }}</button>
     <br><br><br>
+    <h1>{{ si!==true ? "Modulo di accesso" : "Modulo di Registrazione"}}</h1>
     <form [formGroup]="form" style="margin:auto">
         
         <mat-form-field appearance="outline">
@@ -35,7 +36,7 @@
             <input matInput placeholder="Cognome" formControlName="cognome"  required>
             <mat-error *ngIf="form.hasError('required', 'cognome')">Inserisci il cognome</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline"  *ngIf="si">
             <mat-label>Data di nascita</mat-label>
             <input matInput  [matDatepicker]="data1" formControlName="data" required>
             <mat-datepicker-toggle matSuffix [for]="data1"></mat-datepicker-toggle>

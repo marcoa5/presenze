@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
       data: ['', [Validators.required]],
     },{validator: CustomValidators.contP})  
   }
-  si = true;
+  si = false;
   hide = true;
   ngOnInit(): void {}
 
