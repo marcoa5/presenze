@@ -1,1 +1,52 @@
-<p>main works!</p>
+<div style="text-align:center; width: 100%;">
+    <button id="scelta" mat-raised-button color="primary" (click)="si=!si">{{ si==true ? "Sign In" : "Sign Up" }}</button>
+    <br><br><br>
+    <form [formGroup]="form" style="margin:auto">
+        
+        <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="esempio@example.com" formControlName="email" required>
+        <mat-error *ngIf="form.hasError('email','email')">Inserisci un'email valida</mat-error>
+        <mat-error *ngIf="form.hasError('required','email')">Inserisci un'email</mat-error>
+        <mat-error *ngIf="!form.hasError('email','email') && form.hasError('epiroc','email')">Inserire l'email aziendale</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="password" formControlName="password" [type]="!hide? 'text' : 'password'" required>
+            <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="form.hasError('required', 'password')">Inserisci una password</mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'password')">La password deve contenere almeno 6 digit</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="si">
+            <mat-label>Conferma Password</mat-label>
+            <input matInput placeholder="password" formControlName="password1" [type]="!hide? 'text' : 'password'" required>
+            <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="form.hasError('required', 'password1')">Inserisci una password</mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'password1')">La password deve contenere almeno 6 digit</mat-error>
+            <mat-error *ngIf="form.hasError('mustMatch', 'password1')">Le password non coincidono</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="si">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome" formControlName="nome"  required>
+            <mat-error *ngIf="form.hasError('required', 'nome')">Inserisci il nome</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="si">
+            <mat-label>Cognome</mat-label>
+            <input matInput placeholder="Cognome" formControlName="cognome"  required>
+            <mat-error *ngIf="form.hasError('required', 'cognome')">Inserisci il cognome</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Data di nascita</mat-label>
+            <input matInput  [matDatepicker]="data1" formControlName="data" required>
+            <mat-datepicker-toggle matSuffix [for]="data1"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #data1></mat-datepicker>
+            <mat-error *ngIf="form.hasError('required', 'data')">Inserisci la data di nascita</mat-error>
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary" style="float:left">Annulla</button>
+            <button mat-raised-button color="primary" style="float: right;" [disabled]="c(form)" (click)="copia(form)">{{ si==false ? "Accedi" : "Registrati" }}</button> 
+        </div>
+        
+    </form>
+
+</div>
